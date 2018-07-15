@@ -23,7 +23,7 @@ spec:
           command:
             - sh
             - -c
-            - chroot /rootfs yum update -y && chroot /rootfs amazon-linux-extras install python3 && chroot /rootfs yum install -y fuse git && chroot /rootfs pip3 install git+git://github.com/met-office-lab/pysssix.git@big_cache && chroot /rootfs curl -L -o /usr/bin/goofys http://bit.ly/goofys-latest && chroot /rootfs chmod +x /usr/bin/goofys
+            - "[ -f /etc/hosts ] && echo 'skip'  || (chroot /rootfs yum update -y && chroot /rootfs amazon-linux-extras install python3 && chroot /rootfs yum install -y fuse git && chroot /rootfs pip3 install git+git://github.com/met-office-lab/pysssix.git@big_cache && chroot /rootfs curl -L -o /usr/bin/goofys http://bit.ly/goofys-latest && chroot /rootfs chmod +x /usr/bin/goofys)"
         - name: s3-flex-volume-drivers-deploy
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: Always
